@@ -53,41 +53,33 @@ def genChords(length):
 
 
 
+pygame.midi.init()
+player = pygame.midi.Output(0)
+player.set_instrument(2)
+velocity = 127
+
 def playChords(chords):
     midiTable = {
-    'I' : [48, 64, 67, 72],
-    'I6' : [52, 60, 67, 72],
-
-    'ii' : [50, 62, 65, 69],
-    'ii6' : [53, 62, 65, 69],
-
-    'iii' : [52, 60, 67, 71],
-    'iii64' : [47, 60, 67, 71],
-
-    'IV' : [53, 65, 69, 72],
-    'IV6' : [45, 65, 69, 72],
-    'IV64' : [48, 65, 69, 72],
-
-    'V' : [55, 62, 67, 71],
-    'V6' : [47, 62, 67, 71 ],
-    'V64' : [50, 62, 67, 71 ],
-
-    "vi" : [45, 64, 69, 72],
-
-    "vii06" : [50, 62, 65, 71]
+        'I' : [48, 64, 67, 72],
+        'I6' : [52, 60, 67, 72],
+        'ii' : [50, 62, 65, 69],
+        'ii6' : [53, 62, 65, 69],
+        'iii' : [52, 60, 67, 71],
+        'iii64' : [47, 60, 67, 71],
+        'IV' : [53, 65, 69, 72],
+        'IV6' : [45, 65, 69, 72],
+        'IV64' : [48, 65, 69, 72],
+        'V' : [55, 62, 67, 71],
+        'V6' : [47, 62, 67, 71],
+        'V64' : [50, 62, 67, 71],
+        "vi" : [45, 64, 69, 72],
+        "vii06" : [50, 62, 65, 71]
     }
 
-    pygame.midi.init()
-
-    player = pygame.midi.Output(0)
-    player.set_instrument(2)
-
-    velocity = 127
     chords = chords.split()
     for chord in chords:
         pitches = midiTable[chord]
         for pitch in pitches:
-
             player.note_on(pitch, velocity)
         time.sleep(1)
         for pitch in pitches:
